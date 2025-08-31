@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Matteo AI Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+
+   
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="https://media.tenor.com/HqD7fs6lHYAAAAAe/thomas-shelby-cat.png" alt="Thomas Shelby Cat">
+            </div>
+            <h1>Matteo AI</h1>
+            <div class="subtitle">Asisten Kamu 24/7</div>
+        </div>
+        
+        <div class="chat-container" id="chatContainer">
+            <div class="message ai-message">
+                <div class="message-with-pic">
+                    <img src="https://media.tenor.com/HqD7fs6lHYAAAAAe/thomas-shelby-cat.png" alt="Thomas Shelby Cat" class="profile-pic">
+                    <div class="message-content">
+                        <div class="message-info">
+                            <i class="fas fa-robot"></i>
+                            <span style="margin-left: 6px;">Matteo AI</span>
+                        </div>
+                        Halo! Saya Matteo AI. Ada yang bisa saya bantu hari ini?
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+        
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Ketik pesan..." autocomplete="off">
+            <button id="sendButton">
+                <i class="fas fa-paper-plane"></i>
+                <span>Kirim</span>
+            </button>
+        </div>
+        
+        <div class="footer">
+            <i class="fas fa-code"></i>
+            <span>Powered by Matteo</span>
+        </div>
+    </div>
+<script src="script.js"></script>
+   
+</body>
+</html>
