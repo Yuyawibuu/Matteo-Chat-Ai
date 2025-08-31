@@ -1,74 +1,60 @@
-
-        // Konfigurasi API
-        const API_KEY = "AIzaSyCT8DMom0zqPS7yEu9Kktirt2yhYkBLUNE";
-        const MODEL = "gemini-1.5-flash";
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
-        
         // Elemen DOM
         const chatContainer = document.getElementById('chatContainer');
         const userInput = document.getElementById('userInput');
         const sendButton = document.getElementById('sendButton');
-        const typingIndicator = document.getElementById('typingIndicator');
         
         // Fungsi untuk menambahkan pesan ke chat
         function addMessage(content, isUser = false) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
             
-            const messageWithPic = document.createElement('div');
-            messageWithPic.className = 'message-with-pic';
-            
             if (isUser) {
-                const userPic = document.createElement('div');
-                userPic.className = 'user-profile-pic';
-                userPic.innerHTML = '<i class="fas fa-user"></i>';
-                messageWithPic.appendChild(createMessageContent(content, isUser));
-                messageWithPic.appendChild(userPic);
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                messageContent.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+                messageContent.style.marginLeft = 'auto';
+                messageContent.style.borderBottomLeftRadius = '18px';
+                messageContent.style.borderBottomRightRadius = '5px';
+                
+                const messageInfo = document.createElement('div');
+                messageInfo.className = 'message-info';
+                messageInfo.innerHTML = '<i class="fas fa-user"></i><span style="margin-left: 8px;">Anda</span>';
+                messageInfo.style.justifyContent = 'flex-end';
+                messageInfo.style.color = 'rgba(255, 255, 255, 0.9)';
+                
+                messageContent.appendChild(messageInfo);
+                messageContent.appendChild(document.createTextNode(content));
+                messageDiv.appendChild(messageContent);
             } else {
+                const messageWithPic = document.createElement('div');
+                messageWithPic.className = 'message-with-pic';
+                
                 const aiPic = document.createElement('img');
                 aiPic.src = 'https://media.tenor.com/HqD7fs6lHYAAAAAe/thomas-shelby-cat.png';
-                aiPic.alt = 'Thomas Shelby Cat';
+                aiPic.alt = 'Matteo AI';
                 aiPic.className = 'profile-pic';
+                
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                
+                const messageInfo = document.createElement('div');
+                messageInfo.className = 'message-info';
+                messageInfo.innerHTML = '<i class="fas fa-robot"></i><span style="margin-left: 8px;">Matteo AI</span>';
+                
+                messageContent.appendChild(messageInfo);
+                messageContent.appendChild(document.createTextNode(content));
+                
                 messageWithPic.appendChild(aiPic);
-                messageWithPic.appendChild(createMessageContent(content, isUser));
+                messageWithPic.appendChild(messageContent);
+                messageDiv.appendChild(messageWithPic);
             }
             
-            messageDiv.appendChild(messageWithPic);
             chatContainer.appendChild(messageDiv);
             
             // Scroll ke bawah
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-        
-        // Fungsi untuk membuat konten pesan
-        function createMessageContent(content, isUser) {
-            const messageContent = document.createElement('div');
-            messageContent.className = 'message-content';
-            
-            const messageInfo = document.createElement('div');
-            messageInfo.className = 'message-info';
-            
-            if (isUser) {
-                messageInfo.innerHTML = '<i class="fas fa-user"></i><span style="margin-left: 6px;">Anda</span>';
-            } else {
-                messageInfo.innerHTML = '<i class="fas fa-robot"></i><span style="margin-left: 6px;">Matteo AI</span>';
-            }
-            
-            messageContent.appendChild(messageInfo);
-            messageContent.appendChild(document.createTextNode(content));
-            
-            return messageContent;
-        }
-        
-        // Fungsi untuk menampilkan indikator mengetik
-        function showTypingIndicator() {
-            typingIndicator.style.display = 'block';
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-        
-        // Fungsi untuk menyembunyikan indikator mengetik
-        function hideTypingIndicator() {
-            typingIndicator.style.display = 'none';
+            setTimeout(() => {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 100);
         }
         
         // Fungsi untuk mendapatkan respons dari Gemini API
@@ -112,14 +98,8 @@
             addMessage(message, true);
             userInput.value = '';
             
-            // Tampilkan indikator mengetik
-            showTypingIndicator();
-            
             // Dapatkan respons AI
             const aiResponse = await getAIResponse(message);
-            
-            // Sembunyikan indikator mengetik
-            hideTypingIndicator();
             
             // Tambahkan respons AI
             addMessage(aiResponse);
@@ -138,7 +118,3 @@
         window.addEventListener('load', () => {
             userInput.focus();
         });
-        
-        // Mencegah zoom pada input focus (untuk iOS)
-        document.addEventListener('touchstart', function() {}, {passive: true});
-    
