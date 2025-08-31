@@ -1,4 +1,9 @@
-        // Elemen DOM
+   // Konfigurasi API
+        const API_KEY = "AIzaSyCT8DMom0zqPS7yEu9Kktirt2yhYkBLUNE";
+        const MODEL = "gemini-1.5-flash";
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
+        
+// Elemen DOM
         const chatContainer = document.getElementById('chatContainer');
         const userInput = document.getElementById('userInput');
         const sendButton = document.getElementById('sendButton');
@@ -118,3 +123,4 @@
         window.addEventListener('load', () => {
             userInput.focus();
         });
+
