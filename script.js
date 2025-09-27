@@ -1,5 +1,5 @@
 // Konfigurasi API
-        const API_KEY = "AIzaSyCsxzsCwnBNK2-hvjXkXDlmBadV39ZE8UU";
+        const API_KEY = "AIzaSyCT8DMom0zqPS7yEu9Kktirt2yhYkBLUNE";
         const MODEL = "gemini-1.5-flash";
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
         
@@ -123,4 +123,5 @@
         window.addEventListener('load', () => {
             userInput.focus();
         });
+
 
